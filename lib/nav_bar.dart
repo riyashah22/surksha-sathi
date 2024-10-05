@@ -1,59 +1,64 @@
-import 'package:dot_bottom_nav_bar/view/dot_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart'; // Import correct GetX package
+import 'package:hugeicons/hugeicons.dart';
 import 'package:suraksha_sathi/screens/health/health_screen.dart';
 import 'package:suraksha_sathi/screens/policy/policy_screen.dart';
 import 'package:suraksha_sathi/screens/safety/safety_screen.dart';
 
-class Navbar extends StatefulWidget {
-  const Navbar({super.key});
+class CustomNavBar extends StatefulWidget {
+  const CustomNavBar({super.key});
 
   @override
-  State<Navbar> createState() => _NavbarState();
+  State<CustomNavBar> createState() => _CustomNavBarState();
 }
 
-class _NavbarState extends State<Navbar> {
-  int selectIndex = 0;
-  List<Widget> _modules = const [
-    SafetyScreen(),
-    PolicyScreen(),
-    HealthScreen()
-  ];
+class _CustomNavBarState extends State<CustomNavBar> {
   @override
   Widget build(BuildContext context) {
+    final NavigationController controller = Get.put(NavigationController());
+
     return Scaffold(
-      extendBody: false,
-      appBar: AppBar(
-        toolbarHeight: 0,
-      ),
-      body: _modules[selectIndex],
-      bottomNavigationBar: DotBottomNavBar(
-        // backgroundColor: Colors.transparent,
-        // selectedColor: appColors.primary,
-        // dotColor: appColors.primary,
-        currentIndex: selectIndex,
-        onTap: (value) {
-          setState(() {
-            selectIndex = value;
-          });
-        },
-        items: [
-          BottomNavItem(
-            emptySvg: "assets/outline/safety.svg",
-            fillSvg: "assets/fill/safety.svg",
-            label: "Safety",
-          ),
-          BottomNavItem(
-            emptySvg: "assets/outline/policy.svg",
-            fillSvg: "assets/fill/policy.svg",
-            label: "Policy",
-          ),
-          BottomNavItem(
-            emptySvg: "assets/outline/medkit.svg",
-            fillSvg: "assets/fill/medkit.svg",
-            label: "Health",
-          ),
-        ],
-      ),
+      body: Obx(() => controller.screens[controller.selectedIndex.value]),
+      bottomNavigationBar: Obx(() => NavigationBar(
+              height: 80,
+              elevation: 0,
+              selectedIndex: controller.selectedIndex.value,
+              onDestinationSelected: (int index) {
+                controller.changeIndex(index); // Handle index change
+              },
+              destinations: const [
+                NavigationDestination(
+                  icon: Icon(
+                    Icons.health_and_safety,
+                    color: Colors.green,
+                  ),
+                  label: "Safety",
+                ),
+                NavigationDestination(
+                  icon: HugeIcon(
+                      icon: HugeIcons.strokeRoundedPolicy, color: Colors.green),
+                  label: "Policy",
+                ),
+                NavigationDestination(
+                  icon: HugeIcon(
+                      icon: HugeIcons.strokeRoundedHealth, color: Colors.green),
+                  label: "Health",
+                ),
+              ])),
     );
+  }
+}
+
+class NavigationController extends GetxController {
+  final Rx<int> selectedIndex = 0.obs;
+
+  final screens = [
+    const SafetyScreen(),
+    const PolicyScreen(),
+    const HealthScreen(),
+  ];
+
+  void changeIndex(int index) {
+    selectedIndex.value = index;
   }
 }
