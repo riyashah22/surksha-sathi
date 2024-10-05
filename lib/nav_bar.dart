@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart'; // Import correct GetX package
+import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:suraksha_sathi/screens/health/health_screen.dart';
 import 'package:suraksha_sathi/screens/policy/policy_screen.dart';
