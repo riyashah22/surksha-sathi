@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:suraksha_sathi/screens/chatbot/chatbot_screen.dart';
 import 'package:suraksha_sathi/screens/health/health_screen.dart';
 import 'package:suraksha_sathi/screens/policy/policy_screen.dart';
 import 'package:suraksha_sathi/screens/safety/safety_screen.dart';
@@ -44,6 +45,11 @@ class _CustomNavBarState extends State<CustomNavBar> {
                       icon: HugeIcons.strokeRoundedHealth, color: Colors.green),
                   label: "Health",
                 ),
+                NavigationDestination(
+                  icon: HugeIcon(
+                      icon: HugeIcons.strokeRoundedBot, color: Colors.green),
+                  label: "Chatbot",
+                ),
               ])),
     );
   }
@@ -56,6 +62,7 @@ class NavigationController extends GetxController {
     const SafetyScreen(),
     const PolicyScreen(),
     const HealthScreen(),
+    ChatbotScreen()
   ];
 
   void changeIndex(int index) {

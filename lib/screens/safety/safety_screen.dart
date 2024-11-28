@@ -5,8 +5,10 @@ class SafetyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("Safety"),
+    return Center(
+      child: Container(
+        child: Text("Safety"),
+      ),
     );
   }
 }
