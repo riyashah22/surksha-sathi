@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:suraksha_sathi/theme/theme_ext.dart';
 
 class SafetyScreen extends StatelessWidget {
   const SafetyScreen({super.key});
@@ -58,12 +59,19 @@ class SafetyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appColors = context.appColors;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Safety Measures'),
         actions: [
           TextButton(
-              onPressed: () {}, child: Icon(Icons.share_location_outlined))
+            onPressed: () {},
+            child: Icon(
+              Icons.share_location_outlined,
+              size: 30,
+              color: appColors.primary,
+            ),
+          )
         ],
       ),
       body: Padding(
@@ -106,7 +114,10 @@ class SafetyScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        child: Text("SOS"),
+        child: Text(
+          "SOS",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:suraksha_sathi/screens/chatbot/chatbot_screen.dart';
 import 'package:suraksha_sathi/screens/health/health_screen.dart';
 import 'package:suraksha_sathi/screens/policy/policy_screen.dart';
 import 'package:suraksha_sathi/screens/safety/safety_screen.dart';
+import 'package:suraksha_sathi/theme/theme_ext.dart';
 
 class CustomNavBar extends StatefulWidget {
   const CustomNavBar({super.key});
@@ -17,7 +18,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
   @override
   Widget build(BuildContext context) {
     final NavigationController controller = Get.put(NavigationController());
-
+    final appColors = context.appColors;
     return Scaffold(
       body: Obx(() => controller.screens[controller.selectedIndex.value]),
       bottomNavigationBar: Obx(() => NavigationBar(
@@ -27,27 +28,33 @@ class _CustomNavBarState extends State<CustomNavBar> {
               onDestinationSelected: (int index) {
                 controller.changeIndex(index); // Handle index change
               },
-              destinations: const [
+              destinations: [
                 NavigationDestination(
                   icon: Icon(
                     Icons.health_and_safety,
-                    color: Colors.green,
+                    color: appColors.primary,
                   ),
                   label: "Safety",
                 ),
                 NavigationDestination(
                   icon: HugeIcon(
-                      icon: HugeIcons.strokeRoundedPolicy, color: Colors.green),
+                    icon: HugeIcons.strokeRoundedPolicy,
+                    color: appColors.primary,
+                  ),
                   label: "Policy",
                 ),
                 NavigationDestination(
                   icon: HugeIcon(
-                      icon: HugeIcons.strokeRoundedHealth, color: Colors.green),
+                    icon: HugeIcons.strokeRoundedHealth,
+                    color: appColors.primary,
+                  ),
                   label: "Health",
                 ),
                 NavigationDestination(
                   icon: HugeIcon(
-                      icon: HugeIcons.strokeRoundedBot, color: Colors.green),
+                    icon: HugeIcons.strokeRoundedBot,
+                    color: appColors.primary,
+                  ),
                   label: "Chatbot",
                 ),
               ])),
@@ -60,7 +67,7 @@ class NavigationController extends GetxController {
 
   final screens = [
     const SafetyScreen(),
-    const PolicyScreen(),
+    PolicyScreen(),
     const HealthScreen(),
     ChatbotScreen()
   ];

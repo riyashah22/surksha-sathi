@@ -12,7 +12,7 @@ class AppTheme {
         foregroundColor: color.accent,
       ),
       appBarTheme: AppBarTheme(
-        backgroundColor: color.white,
+        backgroundColor: Color(0xffffe0e9),
         elevation: 2,
         centerTitle: true,
       ),

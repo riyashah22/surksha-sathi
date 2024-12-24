@@ -31,8 +31,8 @@ class AppColors extends ThemeExtension<AppColors> {
 class LightColor extends AppColors {
   LightColor()
       : super(
-          primary: const Color(0xFF0B3F63),
-          secondary: const Color(0xFFE5B21A),
+          primary: const Color(0xFFff477e),
+          secondary: const Color.fromARGB(255, 248, 242, 241),
           accent: const Color(0xFFE9F2F5),
           white: const Color(0xFFFFFFFF),
           richBlack: const Color(0xFF010B13),
