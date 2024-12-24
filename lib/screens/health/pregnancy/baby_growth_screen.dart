@@ -154,23 +154,93 @@ class BabyGrowthScreen extends StatelessWidget {
         title: const Text('Baby Growth Tracker'),
       ),
       body: Center(
-        child: CarouselSlider.builder(
-          itemCount: babyGrowthData.length,
-          itemBuilder: (context, index, realIndex) {
-            final weekData = babyGrowthData[index];
-            return BabyGrowthCard(
-              week: weekData['week']!,
-              imagePath: weekData['image']!,
-              description: weekData['description']!,
-            );
-          },
-          options: CarouselOptions(
-            height: 500,
-            enableInfiniteScroll: false,
-            enlargeCenterPage: true,
-            autoPlay: false,
-            viewportFraction: 0.85,
-          ),
+        child: Column(
+          children: [
+            // Add motivational quote above the carousel
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
+              child: Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.star,
+                            size: 40,
+                            color: Colors.orange,
+                          ),
+                          Icon(
+                            Icons.star,
+                            size: 40,
+                            color: Colors.orange,
+                          ),
+                          Icon(
+                            Icons.star,
+                            size: 40,
+                            color: Colors.orange,
+                          ),
+                          Icon(
+                            Icons.star,
+                            size: 40,
+                            color: Colors.orange,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        "“Every week brings new progress, growth, and strength. You and your baby are doing great!”",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.black87,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        "Celebrate the milestones of your baby’s growth!",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 32,
+            ),
+            // Carousel slider below the quote
+            CarouselSlider.builder(
+              itemCount: babyGrowthData.length,
+              itemBuilder: (context, index, realIndex) {
+                final weekData = babyGrowthData[index];
+                return BabyGrowthCard(
+                  week: weekData['week']!,
+                  imagePath: weekData['image']!,
+                  description: weekData['description']!,
+                );
+              },
+              options: CarouselOptions(
+                height: 500,
+                enableInfiniteScroll: false,
+                enlargeCenterPage: true,
+                autoPlay: false,
+                viewportFraction: 0.85,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -203,7 +273,7 @@ class BabyGrowthCard extends StatelessWidget {
             borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
             child: Image.network(
               imagePath,
-              height: 200, // Image height remains the same
+              height: 250, // Image height remains the same
               width: double.infinity,
               fit: BoxFit.fill,
             ),
