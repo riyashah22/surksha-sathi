@@ -18,29 +18,29 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
       'type': 'Post Pregnancy',
       'title': 'Post Pregnancy Yoga',
       'image':
-          'https://img.freepik.com/free-photo/yoga-training-mat_23-2147998947.jpg',
-      'url': 'https://www.youtube.com/watch?v=post_pregnancy_yoga',
+          'https://i.ytimg.com/vi/U87i7QVa17I/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AH-CYAC0AWKAgwIABABGGUgXyhYMA8=&rs=AOn4CLAYqKqwH77rfpzsMDeaoTTJc2uqbg',
+      'url': 'https://www.youtube.com/watch?v=s1bygpnK7fk',
     },
     {
       'type': 'Post Pregnancy',
       'title': 'Stretching After Pregnancy',
       'image':
-          'https://img.freepik.com/free-photo/woman-stretching_23-2149156476.jpg',
-      'url': 'https://www.youtube.com/watch?v=post_pregnancy_stretching',
+          'https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/blogs/24773/images/RXRpMckES9qPZ73B2Ksk_Seated_piriformis_stretch.jpg',
+      'url': 'https://www.youtube.com/watch?v=aJhIsYrNCVc',
     },
     {
       'type': 'Pre Pregnancy',
       'title': 'Prenatal Yoga Tips',
       'image':
-          'https://img.freepik.com/free-photo/yoga-meditation_23-2149174307.jpg',
-      'url': 'https://www.youtube.com/watch?v=prenatal_yoga_tips',
+          'https://thumbs.dreamstime.com/b/pregnant-woman-doing-warrior-two-yoga-pose-home-healthy-pregnancy-fitness-concept-young-working-out-cozy-living-room-74188328.jpg',
+      'url': 'https://www.youtube.com/watch?v=CEEKapabI0o',
     },
     {
       'type': 'Pre Pregnancy',
       'title': 'Exercise for Healthy Pregnancy',
       'image':
-          'https://img.freepik.com/free-photo/woman-doing-exercise_23-2149347134.jpg',
-      'url': 'https://www.youtube.com/watch?v=healthy_pregnancy_exercise',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn7PxP1Mqaxdw95FdGdoz2jxvbB1vdh9NDVw&s',
+      'url': 'https://www.youtube.com/watch?v=7cVluhGjz7Y',
     },
   ];
 
@@ -56,9 +56,12 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
       ),
       body: Column(
         children: [
+          const SizedBox(
+            height: 24,
+          ),
           // Filter buttons
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -67,6 +70,9 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                 _buildFilterButton('Pre Pregnancy', context),
               ],
             ),
+          ),
+          const SizedBox(
+            height: 24,
           ),
           // Video list
           Expanded(
@@ -102,18 +108,19 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
 
   Widget _buildVideoCard(String title, String imageUrl, String videoUrl) {
     return Card(
+      color: const Color(0xfffdfbf9),
       margin: const EdgeInsets.all(8.0),
       child: Row(
         children: [
           // Thumbnail image
           Container(
-            width: 100,
-            height: 100,
+            width: 150,
+            height: 150,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               image: DecorationImage(
                 image: NetworkImage(imageUrl),
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
           ),
@@ -127,20 +134,13 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                   title,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: 20,
                   ),
                 ),
                 const SizedBox(height: 8),
                 ElevatedButton(
-                  onPressed: () async {
-                    final uri = Uri.parse(videoUrl);
-                    if (await canLaunchUrl(uri)) {
-                      await launchUrl(uri);
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Could not launch URL')),
-                      );
-                    }
+                  onPressed: () {
+                    _launchUrl(videoUrl);
                   },
                   child: const Text('Watch Video'),
                 ),
@@ -150,5 +150,11 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
         ],
       ),
     );
+  }
+}
+
+Future<void> _launchUrl(String url) async {
+  if (!await launchUrl(Uri.parse(url))) {
+    throw Exception('Could not launch $url');
   }
 }

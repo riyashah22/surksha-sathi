@@ -9,31 +9,32 @@ class PolicyScreen extends StatelessWidget {
       'title': 'Nirbhaya Fund',
       'description':
           'The Nirbhaya Fund was established to enhance women\'s safety and security by supporting initiatives like self-defense training, CCTVs in public places, and helpline numbers.',
-      'url': 'https://www.youtube.com'
+      'url': 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=1743231'
     },
     {
       'title': 'Women Helpline Scheme',
       'description':
           'This scheme provides a 24-hour toll-free helpline (181) to help women in distress and provide immediate support services.',
-      'url': 'https://wcd.nic.in/schemes/women-helpline-scheme'
+      'url':
+          'https://schemes.vikaspedia.in/viewcontent/schemesall/schemes-for-women-schemesall/schemes-for-pregnancy-womens/women-helpline-scheme?lgn=en'
     },
     {
       'title': 'One Stop Centre Scheme',
       'description':
           'One Stop Centres, also known as Sakhi Centres, support women affected by violence. Services include legal aid, counseling, and temporary shelter.',
-      'url': 'https://wcd.nic.in/schemes/one-stop-centre-scheme'
+      'url': 'https://wcdhry.gov.in/schemes-for-women/onestop-centre/'
     },
     {
       'title': 'Mahila Police Volunteers',
       'description':
           'This initiative encourages community participation by connecting women with the police system to ensure timely reporting of crimes against women.',
-      'url': 'https://wcd.nic.in/schemes/mahila-police-volunteers'
+      'url': 'https://pib.gov.in/Pressreleaseshare.aspx?PRID=1579525'
     },
     {
       'title': 'Ujjawala Scheme',
       'description':
           'The Ujjawala Scheme aims to prevent trafficking and rescue, rehabilitate, and reintegrate victims of trafficking for commercial sexual exploitation.',
-      'url': 'https://wcd.nic.in/schemes/ujjawala'
+      'url': 'https://pmuy.gov.in/ujjwala2.html'
     },
   ];
 

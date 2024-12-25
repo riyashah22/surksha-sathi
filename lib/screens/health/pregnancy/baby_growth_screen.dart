@@ -161,6 +161,7 @@ class BabyGrowthScreen extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
               child: Card(
+                color: Color(0xfffdfbf9),
                 elevation: 4,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -262,6 +263,7 @@ class BabyGrowthCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Color(0xfffdfbf9),
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),

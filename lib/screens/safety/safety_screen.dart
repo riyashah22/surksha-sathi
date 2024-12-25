@@ -46,7 +46,7 @@ class SafetyScreen extends StatelessWidget {
     {
       'name': 'First Aid Kit',
       'image':
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTr-wCrIrMClKK9DoeH9IXz4Z3dTVGlUAQRA&s'
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSofbj28f5QDdBRn35BYUMk5TvRItCqN1hF6A&s'
     },
     {
       'name': 'Personal Tracker',

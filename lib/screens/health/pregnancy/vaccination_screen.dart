@@ -73,6 +73,7 @@ class VaccinationScreen extends StatelessWidget {
       String month, String vaccine, String description, BuildContext context) {
     final appColors = context.appColors;
     return Card(
+      color: Color(0xfffdfbf9),
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),

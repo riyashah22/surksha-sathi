@@ -50,14 +50,14 @@ class _PeriodScreenState extends State<PeriodScreen> {
       "description":
           "Non-prescription pain relievers like ibuprofen or aspirin can provide quick relief.",
       "imagePath":
-          "https://ayurvalley.com/wp-content/uploads/2018/09/Levels-of-Meditation.jpg"
+          "https://www.cambridgebiotherapies.com/wp-content/uploads/what-is-medication-management.jpg"
     },
     {
       "title": "Aromatherapy",
       "description":
           "Essential oils like lavender can have a calming effect, reducing stress and discomfort.",
       "imagePath":
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNJQYR88a0srOCk5laHHOI8nYKx0_p3THpgg&s"
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCsP2l0zKaildJe1SvYpaM3_Nzc3xjYdYYAA&s"
     },
   ];
 
@@ -80,80 +80,87 @@ class _PeriodScreenState extends State<PeriodScreen> {
     showDialog(
       context: context,
       builder: (context) {
-        return AlertDialog(
-          backgroundColor: Color(0xfffdfbf9),
-          title: const Text('Enter Your Cycle Details'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                title: const Text('Last Period Date'),
-                subtitle: Text(DateFormat.yMMMd().format(selectedDate)),
-                trailing: IconButton(
-                  icon: const Icon(Icons.calendar_today),
-                  onPressed: () async {
-                    final pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: selectedDate,
-                      firstDate: DateTime(2000),
-                      lastDate: DateTime.now(),
-                      builder: (BuildContext context, Widget? child) {
-                        return Theme(
-                          data: Theme.of(context).copyWith(
-                            colorScheme: ColorScheme.light(
-                              primary:
-                                  appColors.primary, // Header background color
-                              onPrimary: Colors.white, // Header text color
-                              onSurface: Colors.black, // Body text color
-                            ),
-                            dialogBackgroundColor: Colors
-                                .pink[50], // Background color of the dialog
-                          ),
-                          child: child!,
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setStateDialog) {
+            return AlertDialog(
+              backgroundColor: Color(0xfffdfbf9),
+              title: const Text('Enter Your Cycle Details'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ListTile(
+                    title: const Text('Last Period Date'),
+                    subtitle: Text(DateFormat.yMMMd().format(selectedDate)),
+                    trailing: IconButton(
+                      icon: const Icon(Icons.calendar_today),
+                      onPressed: () async {
+                        final pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: selectedDate,
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime.now(),
+                          builder: (BuildContext context, Widget? child) {
+                            return Theme(
+                              data: Theme.of(context).copyWith(
+                                colorScheme: ColorScheme.light(
+                                  primary: appColors
+                                      .primary, // Header background color
+                                  onPrimary: Colors.white, // Header text color
+                                  onSurface: Colors.black, // Body text color
+                                ),
+                                dialogBackgroundColor:
+                                    Colors.pink[50], // Dialog background color
+                              ),
+                              child: child!,
+                            );
+                          },
                         );
-                      },
-                    );
 
-                    if (pickedDate != null) {
-                      setState(() => selectedDate = pickedDate);
+                        if (pickedDate != null) {
+                          setStateDialog(() {
+                            selectedDate =
+                                pickedDate; // Update the dialog's state
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                  TextField(
+                    controller: cycleController,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Cycle Length (days)',
+                      hintText: 'e.g., 28',
+                    ),
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (cycleController.text.isNotEmpty) {
+                      setState(() {
+                        lastPeriodDate = selectedDate; // Update the main state
+                        cycleDays = int.parse(
+                            cycleController.text); // Update cycle days
+                        isFirstVisit = false; // Update visit status
+                        showRemedies = true; // Show remedies section
+                      });
+                      Navigator.pop(context);
                     }
                   },
+                  child: const Text('Save'),
                 ),
-              ),
-              TextField(
-                controller: cycleController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Cycle Length (days)',
-                  hintText: 'e.g., 28',
-                ),
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text(
-                'Cancel',
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (cycleController.text.isNotEmpty) {
-                  setState(() {
-                    lastPeriodDate = selectedDate; // Update last period date
-                    cycleDays =
-                        int.parse(cycleController.text); // Update cycle days
-                    isFirstVisit = false; // Update visit status
-                    showRemedies = true; // Show remedies section
-                  });
-                  Navigator.pop(context);
-                }
-              },
-              child: const Text('Save'),
-            ),
-          ],
+              ],
+            );
+          },
         );
       },
     );
