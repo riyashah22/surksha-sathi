@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:suraksha_sathi/theme/theme_ext.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SafetyScreen extends StatelessWidget {
   const SafetyScreen({super.key});
@@ -57,6 +60,44 @@ class SafetyScreen extends StatelessWidget {
     },
   ];
 
+  Future<void> _makePhoneCall(String phoneNumber) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: phoneNumber,
+    );
+    await launchUrl(launchUri);
+  }
+
+  Future<void> _shareLocation() async {
+    try {
+      // Check for location permissions
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        permission = await Geolocator.requestPermission();
+        if (permission != LocationPermission.whileInUse &&
+            permission != LocationPermission.always) {
+          throw Exception('Location permissions are denied');
+        }
+      }
+
+      // Fetch the current location
+      Position position = await Geolocator.getCurrentPosition(
+        // ignore: deprecated_member_use
+        desiredAccuracy: LocationAccuracy.high,
+      );
+
+      // Prepare the location data to share
+      String locationMessage =
+          'My current location: https://www.google.com/maps?q=${position.latitude},${position.longitude}';
+
+      // Share the location
+      Share.share(locationMessage);
+    } catch (e) {
+      debugPrint('Error fetching location: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final appColors = context.appColors;
@@ -65,7 +106,7 @@ class SafetyScreen extends StatelessWidget {
         title: const Text('Safety Measures'),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: _shareLocation,
             child: Icon(
               Icons.share_location_outlined,
               size: 30,
@@ -113,10 +154,12 @@ class SafetyScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          _makePhoneCall("7874333963");
+        },
         child: Text(
           "SOS",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
     );

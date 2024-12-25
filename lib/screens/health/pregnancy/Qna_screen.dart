@@ -82,7 +82,7 @@ class _QnaScreenState extends State<QnaScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Q&A Screen'),
+        title: const Text('Q & A'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

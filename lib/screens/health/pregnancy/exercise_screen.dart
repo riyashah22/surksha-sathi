@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:suraksha_sathi/screens/safety/safety_screen.dart';
 import 'package:suraksha_sathi/theme/theme_ext.dart';
 import 'package:url_launcher/url_launcher.dart';
 

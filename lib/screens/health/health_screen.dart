@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:suraksha_sathi/screens/health/period/period_screen.dart';
 import 'package:suraksha_sathi/screens/health/pregnancy_screen.dart';
 
 class HealthScreen extends StatelessWidget {
@@ -14,7 +15,12 @@ class HealthScreen extends StatelessWidget {
         children: [
           Expanded(
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const PeriodScreen()),
+                );
+              },
               child: _buildCard('Periods',
                   'https://images.herzindagi.info/image/2022/Sep/women-talk-about-first-periods.jpg'),
             ),
