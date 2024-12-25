@@ -55,7 +55,8 @@ class PolicyScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           final policy = policies[index];
           return Card(
-            elevation: 4,
+            color: Color(0xfffdfbf9),
+            elevation: 3,
             margin: const EdgeInsets.symmetric(vertical: 8.0),
             child: ExpansionTile(
               title: Text(

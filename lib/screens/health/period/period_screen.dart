@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:suraksha_sathi/screens/health/pregnancy/vaccination_screen.dart';
+import 'package:suraksha_sathi/theme/theme_ext.dart';
 
 class PeriodScreen extends StatefulWidget {
   const PeriodScreen({super.key});
@@ -64,12 +66,13 @@ class _PeriodScreenState extends State<PeriodScreen> {
     super.initState();
     if (isFirstVisit) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        _showInitialQuestions();
+        _showInitialQuestions(context);
       });
     }
   }
 
-  void _showInitialQuestions() {
+  void _showInitialQuestions(BuildContext context) {
+    final appColors = context.appColors;
     DateTime selectedDate = DateTime.now();
     TextEditingController cycleController =
         TextEditingController(text: cycleDays.toString());
@@ -78,6 +81,7 @@ class _PeriodScreenState extends State<PeriodScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
+          backgroundColor: Color(0xfffdfbf9),
           title: const Text('Enter Your Cycle Details'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -93,7 +97,23 @@ class _PeriodScreenState extends State<PeriodScreen> {
                       initialDate: selectedDate,
                       firstDate: DateTime(2000),
                       lastDate: DateTime.now(),
+                      builder: (BuildContext context, Widget? child) {
+                        return Theme(
+                          data: Theme.of(context).copyWith(
+                            colorScheme: ColorScheme.light(
+                              primary:
+                                  appColors.primary, // Header background color
+                              onPrimary: Colors.white, // Header text color
+                              onSurface: Colors.black, // Body text color
+                            ),
+                            dialogBackgroundColor: Colors
+                                .pink[50], // Background color of the dialog
+                          ),
+                          child: child!,
+                        );
+                      },
                     );
+
                     if (pickedDate != null) {
                       setState(() => selectedDate = pickedDate);
                     }
@@ -113,7 +133,10 @@ class _PeriodScreenState extends State<PeriodScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Cancel'),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: Colors.black),
+              ),
             ),
             ElevatedButton(
               onPressed: () {
@@ -157,6 +180,7 @@ class _PeriodScreenState extends State<PeriodScreen> {
   @override
   Widget build(BuildContext context) {
     DateTime? nextPeriodDate = lastPeriodDate?.add(Duration(days: cycleDays));
+    final appColors = context.appColors;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Period Tracker'),
@@ -171,21 +195,21 @@ class _PeriodScreenState extends State<PeriodScreen> {
                 width: 200,
                 height: 200,
                 decoration: BoxDecoration(
-                  color: Colors.red[100],
+                  color: appColors.secondary,
                   shape: BoxShape.circle,
                   border: Border.all(
-                    color: Colors.red,
+                    color: appColors.primary,
                     width: 4.0,
                   ),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       'Prediction: Period',
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.red,
+                        color: appColors.primary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -200,17 +224,19 @@ class _PeriodScreenState extends State<PeriodScreen> {
                     const SizedBox(height: 8),
                     Text(
                       'Next: ${DateFormat.yMMMd().format(nextPeriodDate)}',
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.red,
-                      ),
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: appColors.primary,
+                          fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
               ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _showInitialQuestions,
+              onPressed: () {
+                _showInitialQuestions(context);
+              },
               child: const Text('Edit Period Dates'),
             ),
             const SizedBox(height: 20),

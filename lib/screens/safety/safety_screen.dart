@@ -56,7 +56,7 @@ class SafetyScreen extends StatelessWidget {
     {
       'name': 'Emergency Contact Card',
       'image':
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf9fa55e_WN5uAJvInTBktio4VOF_VJKvEIA&s'
+          'https://priorityprepper.com/wp-content/uploads/2021/05/Emergency-ID-Card-Template-12345-1.png'
     },
   ];
 
@@ -127,7 +127,8 @@ class SafetyScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             final item = safetyKits[index];
             return Card(
-              elevation: 4,
+              color: Color(0xfffdfbf9),
+              elevation: 3,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -157,9 +158,9 @@ class SafetyScreen extends StatelessWidget {
         onPressed: () {
           _makePhoneCall("7874333963");
         },
-        child: Text(
+        child: const Text(
           "SOS",
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
     );

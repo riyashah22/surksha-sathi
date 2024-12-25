@@ -11,8 +11,8 @@ class AppTheme {
         backgroundColor: color.primary,
         foregroundColor: color.accent,
       ),
-      appBarTheme: AppBarTheme(
-        backgroundColor: Color(0xffffe0e9),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Color(0xffffe5ec),
         elevation: 2,
         centerTitle: true,
       ),

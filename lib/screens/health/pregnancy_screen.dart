@@ -95,16 +95,16 @@ class PregnancyScreen extends StatelessWidget {
   }
 
   // Method to launch a URL
-  void _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
+
+  Future<void> _launchURL(String _url) async {
+    if (!await launchUrl(Uri.parse(_url))) {
+      throw Exception('Could not launch $_url');
     }
   }
 
   Widget _buildCard(String title, String imagePath) {
     return Card(
+      color: Color(0xfffdfbf9),
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
