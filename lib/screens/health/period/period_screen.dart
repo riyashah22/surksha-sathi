@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:suraksha_sathi/screens/health/pregnancy/vaccination_screen.dart';
 import 'package:suraksha_sathi/theme/theme_ext.dart';
 
 class PeriodScreen extends StatefulWidget {
