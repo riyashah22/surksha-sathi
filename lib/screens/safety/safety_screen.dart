@@ -156,7 +156,7 @@ class SafetyScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _makePhoneCall("7874333963");
+          _makePhoneCall("100");
         },
         child: const Text(
           "SOS",
